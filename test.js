@@ -1,3 +1,4 @@
+'use strict';
 const assert = require('node:assert').strict;
 // const assert = require('node:assert/strict');
 // assert.deepEqual()
@@ -21,6 +22,25 @@ const shortenIntervalNameTests = [
 for (const test of shortenIntervalNameTests) {
     assert.equal(shortenIntervalName(test[0]), test[1]);
 }
+
+const noteRegex = require('./script').noteRegex;
+const noteRegexTests = [
+    ['C'],
+    ['D#'],
+    ['Ebb'],
+    ['F11'],
+    ['G-100'],
+    ['something else entirely']
+];
+for (const test of noteRegexTests) {
+    const result = noteRegex.exec(test[0])
+    console.log(test[0], (result || []).slice(1, 4));
+}
+
+const {Note, SCALES} = require('./script');
+const noteC = new Note('C'); 
+console.log(noteC);
+console.log(noteC.addInterval('MINOR_2ND'));
 
 
 console.log('All tests pass!');
