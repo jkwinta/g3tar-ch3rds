@@ -235,19 +235,9 @@ function IntervalNote(rootNote, intervalName) {
     } else if (resultNaturalValue > resultValue) {
         resultAccidental = 'b'.repeat(resultNaturalValue - resultValue);
     }
-    console.log(
-        'intervalDegree',intervalDegree, '\n',
-        'resultNatural',resultNatural, '\n',
-        'resultValue',resultValue, '\n',
-        'resultNaturalValue',resultNaturalValue, '\n',
-        'resultNaturalDistance',resultNaturalDistance, '\n',
-        'resultAccidental',resultAccidental, '\n',
-        );
-
     Note.call(this, resultNatural, resultAccidental);
     this.interval = intervalName;
     this.root = rootNote;
-
 }
 Object.setPrototypeOf(IntervalNote.prototype, Note.prototype);
 Object.setPrototypeOf(IntervalNote, Note);
@@ -256,6 +246,31 @@ function noteFromString(noteString) {
     const parsed = parseNoteString(noteString);
     return new Note(parsed.natural, parsed.accidental);
 };
+
+const TUNINGS = {
+    'STANDARD': ['E2', 'A2', 'D3', 'G3', 'B3', 'E4'],
+    'OPEN E': ['E2', 'B2', 'E3', 'G#3', 'B3', 'E4'],
+    'OPEN D': ['D2', 'A2', 'D3', 'F#3', 'A3', 'D4'],
+    'OPEN A': ['E2', 'A2', 'E3', 'A3', 'C#4', 'E4'],
+    'OPEN G': ['D2', 'G2', 'D3', 'G3', 'B3', 'D4'],
+    'OPEN G LOW E': ['E2', 'G2', 'D3', 'G3', 'B3', 'D4'],
+    'G6': ['D2', 'G2', 'D3', 'G3', 'B3', 'E4'],
+    'DADGAD': ['D2', 'A2', 'D3', 'G3', 'A3', 'D4'],
+    'DROP D': ['D2', 'A2', 'D3', 'G3', 'B3', 'E4'],
+    'DOUBLE DROP D': ['D2', 'A2', 'D3', 'G3', 'B3', 'D4'],
+};
+const DEFAULT_TUNING = 'STANDARD';
+function Tuning(tuningName) {
+    tuningName = Object.keys(TUNINGS).includes(tuningName) ? tuningName : DEFAULT_TUNING;
+    this.name = tuningName;
+    const noteNames = TUNINGS[tuningName];
+    this.notes = noteNames.map(n => noteFromString(n));
+}
+Tuning.prototype.getValue = function (stringIndex, fretNumber) {
+    return this.notes[stringIndex].value + fretNumber;
+};
+// Tuning.prototype.getNote = function () {};
+
 
 
 

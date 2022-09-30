@@ -40,7 +40,9 @@ for (const test of noteRegexTests) {
 const {Note, SCALES} = require('./script');
 const noteC = new Note('C'); 
 console.log(noteC);
+console.log(noteC.addInterval('ROOT'));
 console.log(noteC.addInterval('MINOR_2ND'));
+console.log(noteC.addInterval('MAJOR_2ND'));
 
 
 console.log('All tests pass!');
