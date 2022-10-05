@@ -240,7 +240,7 @@ function IntervalNote(rootNote, intervalName) {
     this.root = rootNote;
 }
 Object.setPrototypeOf(IntervalNote.prototype, Note.prototype);
-Object.setPrototypeOf(IntervalNote, Note);
+// Object.setPrototypeOf(IntervalNote, Note);  // What about this one?
 
 function noteFromString(noteString) {
     const parsed = parseNoteString(noteString);
@@ -271,6 +271,85 @@ Tuning.prototype.getValue = function (stringIndex, fretNumber) {
 };
 // Tuning.prototype.getNote = function () {};
 
+
+// UTILS
+function titleCaseWord(word) {
+    return word[0].toUpperCase() + word.slice(1).toLowerCase();
+}
+
+function titleCase(s) {
+    return s.split(' ').map(titleCaseWord).join(' ');
+}
+
+function shuffle(a) {
+    const result = a.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+}
+
+
+function zip(...lists) {
+    const result = [];
+    const minLength = Math.min(...lists.map(l => l.length));
+    for (let i = 0; i < minLength; i++) {
+        if (lists.every(l => i in l)) {
+            result[i] = lists.map(l => l[i]);
+        } else {
+            break;
+        }
+    }
+    return result;
+}
+
+function uniqueValues(list) {
+    const result = [];
+    for (let item of list) {
+        if (item != null && !result.includes(item)) {
+            result.push(item);
+        }
+    }
+    return result;
+}
+
+function numSum(list) {
+    return list.reduce((a, b) => a + b, 0);
+}
+
+function numProd(list) {
+    return list.reduce((a, b) => a * b, 1);
+}
+
+function range1(stop) {
+    if (stop > 0) {
+        return Array(stop).fill(null).map((_v, i) => i);
+    }
+    return [];
+}
+
+function NoteCollection(rootNoteName, collectionType, collectionName) {
+    this.rootNoteName = rootNoteName;
+    this.collectionType = collectionType;
+    this.collectionName = collectionName;
+    if (collectionType === 'SCALE') {
+        this.intervals = SCALES[collectionName];
+    } else if (collectionType === 'CHORD') {
+        this.intervals = CHORDS[collectionName];
+    } else {
+        this.intervals = [];
+    }
+    const root = noteFromString(rootNoteName);
+    this.notes = this.intervals.map(i => root.addInterval(i));
+    this.intervalMap = Array(12).fill(null);
+    this.noteMap = Array(12).fill(null);
+    for (let i = 0; i < this.intervals.length; i++) {
+        let noteValue = mod12(this.notes[i].value);
+        this.intervalMap[noteValue] = this.intervals[i];
+        this.noteMap[noteValue] = this.notes[i];
+    }
+}
 
 
 
