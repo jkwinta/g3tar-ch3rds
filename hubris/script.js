@@ -350,7 +350,7 @@ function NoteCollection(rootNoteName, collectionType, collectionName) {
         this.noteMap[noteValue] = this.notes[i];
     }
 }
-
+// NoteCollection.prototype.
 
 
 
