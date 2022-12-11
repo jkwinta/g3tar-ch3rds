@@ -1,5 +1,27 @@
 import { ALL_NOTES, NOTE_LETTERS } from './notes.js';
 
+function radioButtonWithLabel(group, value) {
+    `
+    <div>
+    <input type="radio" id="dewey" name="drone" value="dewey">
+    <label for="dewey">Dewey</label>
+    </div>
+    `
+    const id = group + '@' + value;
+    const result = document.createElement('div');
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.id = id;
+    input.name = group;
+    input.value = value;
+    result.appendChild(input);
+    const label = document.createElement('label');
+    label.htmlFor = id;
+    label.textContent = value;
+    result.appendChild(label);
+    return result;
+}
+
 function buildRootTable() {
     const result = document.createElement('table');
     const body = document.createElement('tbody');
@@ -8,9 +30,10 @@ function buildRootTable() {
         const row = document.createElement('tr');
         for (const accidental of ['b', '', '#']) {
             const cell = document.createElement('td');
-            const note = rootLetter + accidental;
-            if (ALL_NOTES.includes(note)) {
-                cell.textContent = note;
+            const noteName = rootLetter + accidental;
+            if (ALL_NOTES.includes(noteName)) {
+                const noteButton = radioButtonWithLabel('rootPicker', noteName);
+                cell.appendChild(noteButton);
             }
             row.appendChild(cell);
         }
@@ -27,8 +50,8 @@ function buildTypeTable() {
 
 export function buildPicker(parentDiv, state) {
     const container = document.createElement('div');
-    container.appendChild(buildRootTable());
-    // const rootTable = document.createElement('table');
+    const rootTable = buildRootTable();
+    container.appendChild(rootTable);
     // const typeTable = document.createElement('table');
     // const scaleSelect = document.createElement('select');
     // const chordSelect = document.createElement('select');
