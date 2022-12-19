@@ -156,6 +156,8 @@ const scaleAliases = {
 // const heptatonic_order = ['IONIAN', 'DORIAN', 'PHRYGIAN', 'LYDIAN', 'MIXOLYDIAN', 'AEOLIAN', 'LOCRIAN',];
 
 
+// jbk
+
 function mod(x, n) {
     return x - n * Math.floor(x / n);
 }

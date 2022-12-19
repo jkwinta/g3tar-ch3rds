@@ -1,12 +1,12 @@
-function titleCaseWord(word: string): string {
+function titleCaseWord(word) {
     return word[0].toUpperCase() + word.slice(1).toLowerCase();
 }
 
-export function titleCase(s: string): string {
+export function titleCase(s) {
     return s.split(' ').map(titleCaseWord).join(' ');
 }
 
-export function shuffle<T>(a: T[]): T[] {
+export function shuffle(a) {
     const result = a.slice();
     for (let i = a.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
@@ -16,7 +16,7 @@ export function shuffle<T>(a: T[]): T[] {
 }
 
 
-export function zip(...lists: any[][]): any[][] {
+export function zip(...lists) {
     const result = [];
     const minLength = Math.min(...lists.map(l => l.length));
     for (let i = 0; i < minLength; i++) {
@@ -29,8 +29,8 @@ export function zip(...lists: any[][]): any[][] {
     return result;
 }
 
-export function uniqueValues<T>(list: (T | null)[]): T[] {
-    const result: T[] = [];
+export function uniqueValues(list) {
+    const result = [];
     for (let item of list) {
         if (item != null && !result.includes(item)) {
             result.push(item);
@@ -39,19 +39,19 @@ export function uniqueValues<T>(list: (T | null)[]): T[] {
     return result;
 }
 
-export function numericalSorter(a: number, b: number): number {
+export function numericalSorter(a, b) {
     return a - b;
 }
 
-export function numSum(list: number[]): number {
+export function numSum(list) {
     return list.reduce((a, b) => a + b, 0);
 }
 
-export function numProd(list: number[]): number {
+export function numProd(list) {
     return list.reduce((a, b) => a * b, 1);
 }
 
-export function range1(stop: number): number[] {
+export function range1(stop) {
     if (stop > 0) {
         return Array(stop).fill(null).map((_v, i) => i);
     }
