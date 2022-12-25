@@ -23,6 +23,9 @@ input {
 
 input:checked~label {
     /* border: 6px solid black; */
-    color: red;
+    /* color: red; */
+    color: whitesmoke;
+    /* background-color: mediumblue; */
+    background-color: #0060DF;
     font-size: 110%;
 }

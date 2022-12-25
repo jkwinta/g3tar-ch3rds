@@ -1,3 +1,6 @@
-import { buildPicker } from "./picker.js";
+import { Picker, valueToString } from "./picker.js";
 
-buildPicker(document.getElementById('app'));
+const div = document.createElement('div');
+document.getElementById('app').appendChild(div);
+const picker = new Picker(document.getElementById('app'));
+picker.addListener((v) => div.textContent = v != null ? valueToString(v) : 'Nothing selected');

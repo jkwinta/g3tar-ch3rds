@@ -4,13 +4,6 @@ import { CHORDS } from './note_collections/chords.js';
 import { titleCase } from './util.js';
 
 function radioButtonWithLabel(group, value, labelTransformation = x => x) {
-    // TODO: jbk: probably don't id, use heirarchy to root of querySelector
-    // `
-    // <div>
-    // <input type="radio" id="dewey" name="drone" value="dewey">
-    // <label for="dewey">Dewey</label>
-    // </div>
-    // `
     const id = group + '@' + value;
     const result = document.createElement('div');
     const input = document.createElement('input');
@@ -46,10 +39,8 @@ function buildRootTable() {
         }
         body.appendChild(row);
     }
-    // result.addEventListener('click', (e) => console.log('jbk', e.target.nodeName, e.target.textContent));
     return result;
 }
-// `<tbody><tr><td class="note"></td><td class="note selectedNote">C</td><td class="note">C#</td></tr><tr><td class="note">Db</td><td class="note">D</td><td class="note">D#</td></tr><tr><td class="note">Eb</td><td class="note">E</td><td class="note"></td></tr><tr><td class="note"></td><td class="note">F</td><td class="note">F#</td></tr><tr><td class="note">Gb</td><td class="note">G</td><td class="note">G#</td></tr><tr><td class="note">Ab</td><td class="note">A</td><td class="note">A#</td></tr><tr><td class="note">Bb</td><td class="note">B</td><td class="note"></td></tr></tbody>`
 
 // TODO: This should come from something/where we can use these as keys to get chords/scales/etc?
 const NOTE_COLLECTIONS = { SCALES, CHORDS };
@@ -66,7 +57,6 @@ function buildCollectionTypeTable() {
         row.appendChild(cell);
     }
     body.appendChild(row);
-    // result.addEventListener('click', (e) => console.log('jbk', e.target.nodeName, e.target.textContent));
     return result;
 }
 
@@ -82,16 +72,70 @@ function buildCollectionSelect(items) {
     return result;
 }
 
-export function buildPicker(parentDiv, state) {
-    const container = document.createElement('div');
-    const rootTable = buildRootTable();
-    container.appendChild(rootTable);
-    const collectionTypeTable = buildCollectionTypeTable();
-    container.appendChild(collectionTypeTable);
-    const collectionSelects = Object.values(NOTE_COLLECTIONS).map(collections => buildCollectionSelect(Object.keys(collections)));
-    collectionSelects.forEach(cs => container.appendChild(cs));
-    parentDiv.appendChild(container);
+export function Picker(parent) {
+    this.parent = parent;
+    this.selectedRoot = null;
+    this.selectedCollectionType = null;
+    this.selectedCollections = {};
+
+    this.rootTable = buildRootTable();
+    this.rootTable.addEventListener('change', e => {
+        this.selectedRoot = e.target.value;
+        this.notify();
+        e.stopPropagation();
+    });
+
+    this.collectionTypeTable = buildCollectionTypeTable();
+    this.collectionTypeTable.addEventListener('change', e => {
+        this.selectedCollectionType = e.target.value;
+        for (const collectionType of Object.keys(NOTE_COLLECTIONS)) {
+            this.collectionSelects[collectionType].style.display = collectionType === e.target.value ? '' : 'none';
+        }
+        this.notify();
+        e.stopPropagation();
+    });
+
+    this.collectionSelects = {};
+    for (const collectionType of Object.keys(NOTE_COLLECTIONS)) {
+        this.collectionSelects[collectionType] = buildCollectionSelect(Object.keys(NOTE_COLLECTIONS[collectionType]));
+        this.collectionSelects[collectionType].style.display = 'none';
+        this.collectionSelects[collectionType].addEventListener('change', e => {
+            this.selectedCollections[collectionType] = e.target.value;
+            this.notify();
+            e.stopPropagation();
+        });
+    }
+
+    this.container = document.createElement('div');
+    this.container.appendChild(this.rootTable);
+    this.container.appendChild(this.collectionTypeTable);
+    Object.values(this.collectionSelects).forEach(cs => this.container.appendChild(cs));
+    this.parent.appendChild(this.container);
+
+    this.listeners = [];
+}
+Picker.prototype.addListener = function (newListener) {
+    this.listeners.push(newListener);
+}
+Picker.prototype.getValue = function () {
+    const result = {
+        root: this.selectedRoot,
+        collectionType: this.selectedCollectionType,
+        collection: this.selectedCollections[this.selectedCollectionType],
+    };
+    if (Object.values(result).every(v => v != null)) {
+        return result;
+    }
+    return null;
+};
+Picker.prototype.notify = function () {
+    this.listeners.forEach(listener => listener(this.getValue()));
 }
 
-
-function Picker() { }
+export function valueToString(value) {
+    return [
+        value.root,
+        titleCase(value.collection),
+        titleCase(value.collectionType.slice(0, -1)),
+    ].join(' ');
+}
