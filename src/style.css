@@ -1,10 +1,18 @@
 html {
     font-family: sans-serif;
+    font-size: large;
 }
 
-input {
-    appearance: none;
 
+th, td {
+  border: 1px solid rgb(160 160 160);
+  padding: 0px 0px;
+}
+
+
+input[type=radio] {
+    appearance: none;
+    position: absolute;
     /* border-radius: 50%;
     width: 16px;
     height: 16px;
@@ -17,15 +25,29 @@ input {
     top: 4px; */
 }
 
+td {
+    text-align: center; 
+    vertical-align: middle;
+    /* width: 100%; */
+}
+td > label {
+    display: block;
+    width: 100%;
+    margin: 5px;
+    /* padding: 20px; */
+}
+
 /* input:checked {
     border: 6px solid black;
 } */
 
-input:checked~label {
+label:has(> input[type=radio][name=selectedNote]:checked) {
     /* border: 6px solid black; */
     /* color: red; */
+    text-align: center;
+    justify-content: center;
     color: whitesmoke;
     /* background-color: mediumblue; */
     background-color: #0060DF;
-    font-size: 110%;
+    /* font-size: 110%; */
 }

@@ -1,6 +1,6 @@
-import { NoteClass } from './notes';
+import { noteFromString, noteFromValue } from './notes';
 
-export const TUNINGS_6: { [tuningName: string]: string[] } = {
+export const TUNINGS_6 = {
     'STANDARD': ['E2', 'A2', 'D3', 'G3', 'B3', 'E4'],
     'OPEN E': ['E2', 'B2', 'E3', 'G#3', 'B3', 'E4'],
     'OPEN D': ['D2', 'A2', 'D3', 'F#3', 'A3', 'D4'],
@@ -19,28 +19,18 @@ export const DEFAULT_TUNING = 'STANDARD';
 
 export default TUNINGS;
 
-export class Tuning {
-    name: string;
-    notes: NoteClass[];
 
-    constructor(tuningName: string) {
-        const noteNames = TUNINGS[tuningName];
-        if (!noteNames) {
-            throw Error(`No tuning "${tuningName}"`);
-        }
-        this.name = tuningName;
-        this.notes = noteNames.map(n => new NoteClass(n));
+export function Tuning(tuningName) {
+    const noteNames = TUNINGS[tuningName];
+    if (!noteNames) {
+        throw Error(`No tuning "${tuningName}"`);
     }
-
-    getNote(stringIndex: number, fretNumber: number): NoteClass {
-        return this.notes[stringIndex].addSemitones(fretNumber);
-    }
-
-    getValue(stringIndex: number, fretNumber: number): number {
-        return this.notes[stringIndex].value + fretNumber;
-    }
+    this.name = tuningName;
+    this.notes = noteNames.map(n => noteFromString(n));
 }
-
+Tuning.prototype.getNote = function (stringIndex, fretNumber) {
+    return noteFromValue(this.notes[stringIndex].getValue() + fretNumber);
+}
 
 // # TODO: Check:
 // tuning_frettings = {

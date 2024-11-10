@@ -37,6 +37,9 @@ function Note(natural, accidental = '') {
     this.accidental = accidental;
     this.value = noteValue(natural, accidental);
 }
+Note.prototype.getValue = function () {
+    return this.value;
+}
 Note.prototype.toString = function () {
     return `${this.naturalName}${this.accidentals}`;
 }
@@ -84,7 +87,13 @@ function IntervalNote(rootNote, intervalName) {
 Object.setPrototypeOf(IntervalNote.prototype, Note.prototype);
 // Object.setPrototypeOf(IntervalNote, Note);  // What about this one?
 
-function noteFromString(noteString) {
+export function noteFromString(noteString) {
     const parsed = parseNoteString(noteString);
     return new Note(parsed.natural, parsed.accidental);
 };
+
+export const ALL_NOTES_VALUES = Object.fromEntries(ALL_NOTES.map(n => [n, noteStringValue(n)]));
+
+export function noteFromValue(value) {
+    return Object.entries(ALL_NOTES_VALUES).find(e => e[1] === mod12(value))[0];
+}

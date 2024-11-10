@@ -10,8 +10,94 @@
 
 <body>
     <div id="app">
+        <div id="selector">
+            <label id="selectedChord">Select a chord</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td><label><input type="radio" name="selectedNote" />C</label></td>
+                        <td><label><input type="radio" name="selectedNote" />C#</label></td>
+                    </tr>
+                    <tr>
+                        <td><label><input type="radio" name="selectedNote" />Db</label></td>
+                        <td><label><input type="radio" name="selectedNote" />D</label></td>
+                        <td><label><input type="radio" name="selectedNote" />D#</label></td>
+                    </tr>
+                    <tr>
+                        <td><label><input type="radio" name="selectedNote" />Eb</label></td>
+                        <td><label><input type="radio" name="selectedNote" />E</label></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label><input type="radio" name="selectedNote" />F</label></td>
+                        <td><label><input type="radio" name="selectedNote" />F#</label></td>
+                    </tr>
+                    <tr>
+                        <td><label><input type="radio" name="selectedNote" />Gb</label></td>
+                        <td><label><input type="radio" name="selectedNote" />G</label></td>
+                        <td><label><input type="radio" name="selectedNote" />G#</label></td>
+                    </tr>
+                    <tr>
+                        <td><label><input type="radio" name="selectedNote" />Ab</label></td>
+                        <td><label><input type="radio" name="selectedNote" />A</label></td>
+                        <td><label><input type="radio" name="selectedNote" />A#</label></td>
+                    </tr>
+                    <tr>
+                        <td><label><input type="radio" name="selectedNote" />Bb</label></td>
+                        <td><label><input type="radio" name="selectedNote" />B</label></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label><input type="radio" name="testName" value="Scales">Scales</label>
+                        </td>
+                        <td><label><input type="radio" name="testName" value="Chords">Chords</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <select size="10">
+                <option value="5">5</option>
+                <option value="NOTE">Note</option>
+                <option value="MAJOR">Major</option>
+                <option value="MINOR">Minor</option>
+                <option value="AUGMENTED">Augmented</option>
+                <option value="DIMINISHED">Diminished</option>
+                <option value="DOMINANT 7TH">Dominant 7th</option>
+                <option value="DIMINISHED 7TH">Diminished 7th</option>
+                <option value="HALF-DIMINISHED 7TH">Half-diminished 7th</option>
+                <option value="MINOR 7TH">Minor 7th</option>
+                <option value="MINOR MAJOR 7TH">Minor Major 7th</option>
+                <option value="MAJOR 7TH">Major 7th</option>
+                <option value="AUGMENTED 7TH">Augmented 7th</option>
+                <option value="AUGMENTED MAJOR 7TH">Augmented Major 7th</option>
+                <option value="DOMINANT 7#9">Dominant 7#9</option>
+                <option value="DOMINANT 9TH">Dominant 9th</option>
+                <option value="DOMINANT 11TH">Dominant 11th</option>
+                <option value="DOMINANT 13TH">Dominant 13th</option>
+                <option value="ADD 9">Add 9</option>
+                <option value="ADD 4">Add 4</option>
+                <option value="ADD 6">Add 6</option>
+                <option value="6/9">6/9</option>
+                <option value="7/6">7/6</option>
+                <option value="MIXED 3RD">Mixed 3rd</option>
+                <option value="SUSPENDED 2ND">Suspended 2nd</option>
+                <option value="SUSPENDED 4TH">Suspended 4th</option>
+                <option value="JAZZ SUS">Jazz Sus</option>
+                <option value="MAJOR 7♯11">Major 7♯11</option>
+                <option value="MAJOR 6TH">Major 6th</option>
+                <option value="MINOR MAJOR 6TH">Minor Major 6th</option>
+            </select>
+        </div>
     </div>
-    <script src="./src/index.js" type="module"></script>
+    <!-- <script src="./src/index.js" type="module"></script> -->
 </body>
 
 </html>
