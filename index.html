@@ -12,60 +12,49 @@
     <div id="app">
         <div id="selector">
             <label id="selectedChord">Select a chord</label>
-            <table>
+            <table cellspacing="2px" cellpadding="0px">
                 <tbody>
                     <tr>
                         <td></td>
-                        <td><label><input type="radio" name="selectedNote" />C</label></td>
-                        <td><label><input type="radio" name="selectedNote" />C#</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="C" />C</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="C#" />C#</label></td>
                     </tr>
                     <tr>
-                        <td><label><input type="radio" name="selectedNote" />Db</label></td>
-                        <td><label><input type="radio" name="selectedNote" />D</label></td>
-                        <td><label><input type="radio" name="selectedNote" />D#</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="Db" />Db</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="D"/>D</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="D#"/>D#</label></td>
                     </tr>
                     <tr>
-                        <td><label><input type="radio" name="selectedNote" />Eb</label></td>
-                        <td><label><input type="radio" name="selectedNote" />E</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="Eb"/>Eb</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="E"/>E</label></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><label><input type="radio" name="selectedNote" />F</label></td>
-                        <td><label><input type="radio" name="selectedNote" />F#</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="F" />F</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="F#"/>F#</label></td>
                     </tr>
                     <tr>
-                        <td><label><input type="radio" name="selectedNote" />Gb</label></td>
-                        <td><label><input type="radio" name="selectedNote" />G</label></td>
-                        <td><label><input type="radio" name="selectedNote" />G#</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="Gb"/>Gb</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="G"/>G</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="G#"/>G#</label></td>
                     </tr>
                     <tr>
-                        <td><label><input type="radio" name="selectedNote" />Ab</label></td>
-                        <td><label><input type="radio" name="selectedNote" />A</label></td>
-                        <td><label><input type="radio" name="selectedNote" />A#</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="Ab"/>Ab</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="A"/>A</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="A#"/>A#</label></td>
                     </tr>
                     <tr>
-                        <td><label><input type="radio" name="selectedNote" />Bb</label></td>
-                        <td><label><input type="radio" name="selectedNote" />B</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="Bb"/>Bb</label></td>
+                        <td><label><input type="radio" name="selectedNote" value="B"/>B</label></td>
                         <td></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table>
-                <tbody>
-                    <tr>
-                        <td><label><input type="radio" name="testName" value="Scales">Scales</label>
-                        </td>
-                        <td><label><input type="radio" name="testName" value="Chords">Chords</label>
-                        </td>
                     </tr>
                 </tbody>
             </table>
 
             <select size="10">
-                <option value="5">5</option>
                 <option value="NOTE">Note</option>
+                <option value="5">5</option>
                 <option value="MAJOR">Major</option>
                 <option value="MINOR">Minor</option>
                 <option value="AUGMENTED">Augmented</option>
@@ -91,13 +80,16 @@
                 <option value="SUSPENDED 2ND">Suspended 2nd</option>
                 <option value="SUSPENDED 4TH">Suspended 4th</option>
                 <option value="JAZZ SUS">Jazz Sus</option>
-                <option value="MAJOR 7♯11">Major 7♯11</option>
+                <option value="MAJOR 7#11">Major 7#11</option>
                 <option value="MAJOR 6TH">Major 6th</option>
                 <option value="MINOR MAJOR 6TH">Minor Major 6th</option>
             </select>
+
+            <button id="addChordButton">Add chord</button>
         </div>
+        <div id="legend"></div>
     </div>
-    <!-- <script src="./src/index.js" type="module"></script> -->
+    <script src="./src/index.js" type="module"></script>
 </body>
 
 </html>
