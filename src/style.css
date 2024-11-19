@@ -80,3 +80,16 @@ input:checked+span {
     background-color: #000;
     color: #fff;
 }
+
+.removeChordButton::before {
+    content: '\2715';
+}
+
+.legendEntry {
+    display: flex;
+}
+
+.legendEntry > div {
+    justify-content: center;
+    align-items: center;
+}

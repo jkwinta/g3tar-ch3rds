@@ -1,3 +1,4 @@
+import { makeLegendEntry } from './legend.js';
 import { titleCase } from './util.js';
 
 // import { Picker, valueToString } from "./picker.js";
@@ -84,11 +85,11 @@ function writeLegend(state) {
     while (i < chordList.length) {
         let chordDiv = legendElement.children[i];
         if (!chordDiv) {
-            chordDiv =  document.createElement('div');
+            chordDiv =  makeLegendEntry(i,'');
             legendElement.insertBefore(chordDiv, null);
         }
         let { root, chordType } =chordList[i];
-        chordDiv.textContent = `${root} ${titleCase(chordType)}`;
+        chordDiv.children[1].textContent = `${root} ${titleCase(chordType)}`;
         i++;
     }
     while(legendElement.childElementCount > i) {
